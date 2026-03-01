@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- BCC Crystal Lattice (Iron structure) - FerroQuant Logo
+       8 cube vertices + 1 body-centered atom
+       Isometric projection: x' = cx + (x-z)*0.866*s, y' = cy + (x+z)*0.5*s - y*s
+       Cube half-size s=22, center at (50,50) -->
+
+  <!-- CUBE EDGES (12 total) -->
+  <!-- Top face -->
+  <line x1="50" y1="17" x2="88" y2="39"/>
+  <line x1="88" y1="39" x2="50" y2="61"/>
+  <line x1="50" y1="61" x2="12" y2="39"/>
+  <line x1="12" y1="39" x2="50" y2="17"/>
+
+  <!-- Bottom face -->
+  <line x1="50" y1="39" x2="88" y2="61"/>
+  <line x1="88" y1="61" x2="50" y2="83"/>
+  <line x1="50" y1="83" x2="12" y2="61"/>
+  <line x1="12" y1="61" x2="50" y2="39"/>
+
+  <!-- Vertical edges (connecting top to bottom) -->
+  <line x1="50" y1="17" x2="50" y2="39"/>
+  <line x1="88" y1="39" x2="88" y2="61"/>
+  <line x1="50" y1="61" x2="50" y2="83"/>
+  <line x1="12" y1="39" x2="12" y2="61"/>
+
+  <!-- CENTER-TO-CORNER LINES (8 total) - the BCC characteristic -->
+  <g stroke-opacity="0.5">
+    <!-- To top face corners -->
+    <line x1="50" y1="50" x2="50" y2="17"/>
+    <line x1="50" y1="50" x2="88" y2="39"/>
+    <line x1="50" y1="50" x2="50" y2="61"/>
+    <line x1="50" y1="50" x2="12" y2="39"/>
+    <!-- To bottom face corners -->
+    <line x1="50" y1="50" x2="50" y2="39"/>
+    <line x1="50" y1="50" x2="88" y2="61"/>
+    <line x1="50" y1="50" x2="50" y2="83"/>
+    <line x1="50" y1="50" x2="12" y2="61"/>
+  </g>
+
+  <!-- CORNER NODES (8 cube vertices) -->
+  <!-- Top face -->
+  <circle cx="50" cy="17" r="4" fill="#ffffff" stroke="none"/>
+  <circle cx="88" cy="39" r="4" fill="#ffffff" stroke="none"/>
+  <circle cx="50" cy="61" r="3.5" fill="#ffffff" stroke="none"/>
+  <circle cx="12" cy="39" r="4" fill="#ffffff" stroke="none"/>
+  <!-- Bottom face -->
+  <circle cx="50" cy="39" r="3" fill="#ffffff" stroke="none"/>
+  <circle cx="88" cy="61" r="3.5" fill="#ffffff" stroke="none"/>
+  <circle cx="50" cy="83" r="4" fill="#ffffff" stroke="none"/>
+  <circle cx="12" cy="61" r="3.5" fill="#ffffff" stroke="none"/>
+
+  <!-- CENTER NODE (body-centered - the iron atom) - LARGER to emphasize -->
+  <circle cx="50" cy="50" r="6" fill="#ffffff" stroke="none"/>
+</svg>

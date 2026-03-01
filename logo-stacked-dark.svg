@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140">
+  <!-- FerroQuant Stacked Logo - Dark variant (black on transparent)
+       Icon above Text -->
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url('fonts/SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+        font-weight: 100 900;
+      }
+      .brand-text {
+        font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 700;
+        font-size: 16px;
+        fill: #1a1a1a;
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+
+  <!-- BCC Lattice Icon (centered, scaled to 80x80) -->
+  <g transform="translate(30, 10) scale(0.8)">
+    <!-- CUBE EDGES -->
+    <g fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="50" y1="17" x2="88" y2="39"/>
+      <line x1="88" y1="39" x2="50" y2="61"/>
+      <line x1="50" y1="61" x2="12" y2="39"/>
+      <line x1="12" y1="39" x2="50" y2="17"/>
+      <line x1="50" y1="39" x2="88" y2="61"/>
+      <line x1="88" y1="61" x2="50" y2="83"/>
+      <line x1="50" y1="83" x2="12" y2="61"/>
+      <line x1="12" y1="61" x2="50" y2="39"/>
+      <line x1="50" y1="17" x2="50" y2="39"/>
+      <line x1="88" y1="39" x2="88" y2="61"/>
+      <line x1="50" y1="61" x2="50" y2="83"/>
+      <line x1="12" y1="39" x2="12" y2="61"/>
+    </g>
+    <!-- CENTER-TO-CORNER -->
+    <g fill="none" stroke="#1a1a1a" stroke-width="1.2" stroke-opacity="0.5" stroke-linecap="round">
+      <line x1="50" y1="50" x2="50" y2="17"/>
+      <line x1="50" y1="50" x2="88" y2="39"/>
+      <line x1="50" y1="50" x2="50" y2="61"/>
+      <line x1="50" y1="50" x2="12" y2="39"/>
+      <line x1="50" y1="50" x2="50" y2="39"/>
+      <line x1="50" y1="50" x2="88" y2="61"/>
+      <line x1="50" y1="50" x2="50" y2="83"/>
+      <line x1="50" y1="50" x2="12" y2="61"/>
+    </g>
+    <!-- NODES -->
+    <circle cx="50" cy="17" r="4" fill="#1a1a1a"/>
+    <circle cx="88" cy="39" r="4" fill="#1a1a1a"/>
+    <circle cx="50" cy="61" r="3.5" fill="#1a1a1a"/>
+    <circle cx="12" cy="39" r="4" fill="#1a1a1a"/>
+    <circle cx="50" cy="39" r="3" fill="#1a1a1a"/>
+    <circle cx="88" cy="61" r="3.5" fill="#1a1a1a"/>
+    <circle cx="50" cy="83" r="4" fill="#1a1a1a"/>
+    <circle cx="12" cy="61" r="3.5" fill="#1a1a1a"/>
+    <circle cx="50" cy="50" r="6" fill="#1a1a1a"/>
+  </g>
+
+  <!-- Brand Name (centered below icon) -->
+  <text class="brand-text" x="70" y="120">FerroQuant</text>
+</svg>

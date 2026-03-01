@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Science Behind the Signal — FerroQuant</title>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <meta name="description" content="Why systematic quantitative trading outperforms discretionary trading — and how FerroQuant brings institutional-grade algorithms to retail traders.">
-  <meta property="og:title" content="The Science Behind the Signal — FerroQuant">
-  <meta property="og:description" content="For 30 years, hedge funds have used systematic algorithms to consistently beat retail traders. FerroQuant brings the same infrastructure to you.">
-  <meta property="og:type" content="website">
+  <title>Systematic Advantage — FerroQuant Research</title>
+  <meta name="description" content="An overview of the quantitative methodology underpinning FerroQuant's multi-asset signal generation platform.">
+  <meta property="og:title" content="Systematic Advantage — FerroQuant Research">
+  <meta property="og:description" content="How institutional-grade quantitative methodology is being made accessible to every trader.">
+  <meta property="og:type" content="article">
   <meta property="og:url" content="https://ferroquant.github.io/research">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,668 +17,778 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #0d1117;
-      --surface: #161b22;
-      --border: #30363d;
-      --green: #00ff6a;
-      --blue: #58a6ff;
-      --text: #e6edf3;
-      --muted: #8b949e;
-      --font: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      --white:   #ffffff;
+      --ink:     #0f172a;
+      --ink-mid: #334155;
+      --ink-soft:#64748b;
+      --ink-faint:#94a3b8;
+      --rule:    #e2e8f0;
+      --surface: #f8fafc;
+      --navy:    #1b3a6b;
+      --blue:    #2563eb;
+      --blue-lt: #eff6ff;
+      --font: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: var(--font);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.75;
+      font-size: 1rem;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* NAV */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(13,17,23,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 2rem;
+    /* ─── TOP BAR ─── */
+    .topbar {
+      border-bottom: 1px solid var(--rule);
+      padding: 0.85rem 3rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      background: var(--white);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    .nav-brand img { height: 32px; display: block; }
-    .nav-brand { text-decoration: none; }
-    .nav-links { display: flex; gap: 1rem; align-items: center; }
-    .nav-link {
-      color: var(--muted);
+    .topbar-logo { height: 30px; display: block; }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .topbar-right a {
       text-decoration: none;
-      font-size: 0.875rem;
+      font-size: 0.8125rem;
       font-weight: 500;
-      transition: color 0.2s;
+      color: var(--ink-soft);
+      transition: color 0.15s;
     }
-    .nav-link:hover { color: var(--text); }
-    .nav-cta {
-      background: var(--green);
-      color: #000;
-      padding: 0.4rem 1rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 700;
-      transition: opacity 0.2s;
+    .topbar-right a:hover { color: var(--ink); }
+    .topbar-btn {
+      background: var(--navy);
+      color: #fff !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 4px;
+      font-size: 0.8125rem !important;
+      font-weight: 600 !important;
+      transition: background 0.15s !important;
     }
-    .nav-cta:hover { opacity: 0.85; }
+    .topbar-btn:hover { background: #152d54 !important; }
 
-    /* HERO */
-    .hero {
-      max-width: 860px;
+    /* ─── COVER ─── */
+    .cover {
+      max-width: 820px;
       margin: 0 auto;
-      padding: 5rem 2rem 3rem;
-      text-align: center;
+      padding: 4.5rem 3rem 3.5rem;
+      border-bottom: 2px solid var(--ink);
     }
-    .hero-label {
-      display: inline-block;
+    .cover-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .cover-logo { height: 52px; }
+    .cover-divider {
+      width: 1px;
+      height: 40px;
+      background: var(--rule);
+    }
+    .cover-label {
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--green);
-      border: 1px solid rgba(0,255,106,0.3);
-      padding: 0.3rem 0.75rem;
-      border-radius: 100px;
-      margin-bottom: 1.5rem;
+      letter-spacing: 1.5px;
+      color: var(--ink-soft);
     }
-    .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 900;
-      letter-spacing: -1.5px;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      color: var(--text);
+    .cover-label span {
+      display: block;
+      font-weight: 400;
+      font-size: 0.75rem;
+      margin-top: 0.2rem;
+      color: var(--ink-faint);
     }
-    .hero h1 span { color: var(--green); }
-    .hero-sub {
-      font-size: 1.15rem;
-      color: var(--muted);
-      max-width: 640px;
-      margin: 0 auto 3rem;
-      line-height: 1.7;
-    }
-    .hero-cta {
-      display: inline-block;
-      background: var(--green);
-      color: #000;
-      font-weight: 800;
-      font-size: 1rem;
-      padding: 0.85rem 2.5rem;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-    .hero-cta:hover { opacity: 0.9; transform: translateY(-1px); }
 
-    /* SECTIONS */
-    .container {
-      max-width: 800px;
+    .cover h1 {
+      font-size: clamp(1.9rem, 4vw, 2.75rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+      max-width: 680px;
+    }
+    .cover-sub {
+      font-size: 1.05rem;
+      color: var(--ink-mid);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+    .cover-stats {
+      display: flex;
+      gap: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+    }
+    .cstat { }
+    .cstat-val {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+    .cstat-lbl {
+      font-size: 0.775rem;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 0.3rem;
+    }
+
+    /* ─── BODY ─── */
+    .body {
+      max-width: 820px;
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 0 3rem;
     }
+
     section {
-      padding: 4rem 0;
-      border-top: 1px solid var(--border);
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--rule);
     }
-    .section-num {
+    section:last-of-type { border-bottom: none; }
+
+    .sec-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+    .sec-num {
       font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 2px;
-      color: var(--green);
-      margin-bottom: 0.5rem;
+      color: var(--ink-faint);
+      min-width: 28px;
     }
     h2 {
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.25px;
+      line-height: 1.3;
     }
+
     p {
-      color: var(--muted);
-      margin-bottom: 1.25rem;
-      font-size: 1rem;
+      color: var(--ink-mid);
+      margin-bottom: 1.1rem;
+      font-size: 0.9375rem;
+      max-width: 680px;
     }
-    p strong { color: var(--text); font-weight: 600; }
+    p:last-child { margin-bottom: 0; }
+    p strong { color: var(--ink); font-weight: 600; }
     p a { color: var(--blue); text-decoration: none; }
     p a:hover { text-decoration: underline; }
 
-    /* CALLOUT */
+    /* ─── CALLOUT ─── */
     .callout {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--green);
-      border-radius: 8px;
-      padding: 1.25rem 1.5rem;
-      margin: 2rem 0;
+      background: var(--blue-lt);
+      border-left: 3px solid var(--navy);
+      padding: 1.1rem 1.4rem;
+      margin: 1.75rem 0;
+      border-radius: 0 4px 4px 0;
     }
-    .callout p { margin: 0; color: var(--text); font-size: 1rem; line-height: 1.6; }
-    .callout p em { color: var(--green); font-style: normal; font-weight: 600; }
-
-    /* GRID STATS */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-      margin: 2rem 0;
-    }
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
-    }
-    .stat-card .val {
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--green);
-      letter-spacing: -1px;
-      line-height: 1;
-      margin-bottom: 0.4rem;
-    }
-    .stat-card .lbl {
-      font-size: 0.8rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    /* SYSTEM DIAGRAM */
-    .pipeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin: 2rem 0;
-    }
-    .pipeline-step {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 0;
-      padding: 1.25rem 1.5rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 1.25rem;
-      position: relative;
-    }
-    .pipeline-step:first-child { border-radius: 8px 8px 0 0; }
-    .pipeline-step:last-child { border-radius: 0 0 8px 8px; }
-    .pipeline-step + .pipeline-step { border-top: none; }
-    .pipeline-step:not(:last-child)::after {
-      content: '↓';
-      position: absolute;
-      bottom: -16px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: var(--green);
-      font-size: 1.2rem;
-      z-index: 1;
-    }
-    .step-num {
-      width: 28px;
-      height: 28px;
-      background: rgba(0,255,106,0.1);
-      border: 1px solid rgba(0,255,106,0.3);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--green);
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .step-content h4 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 0.3rem;
-    }
-    .step-content p {
-      font-size: 0.875rem;
-      color: var(--muted);
+    .callout p {
+      color: var(--navy);
+      font-size: 0.9375rem;
+      font-weight: 500;
       margin: 0;
-      line-height: 1.5;
+      max-width: 100%;
     }
 
-    /* COMPARISON TABLE */
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 2rem 0;
-      font-size: 0.875rem;
-    }
-    .compare-table th {
-      background: var(--surface);
-      padding: 0.75rem 1rem;
-      text-align: left;
-      font-weight: 700;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .compare-table th:first-child { color: var(--muted); font-weight: 500; }
-    .compare-table th.us { color: var(--green); }
-    .compare-table td {
-      padding: 0.75rem 1rem;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      vertical-align: top;
-    }
-    .compare-table td.us { color: var(--text); }
-    .check { color: var(--green); font-weight: 700; }
-    .cross { color: #ff7b72; }
-
-    /* RESEARCH SECTION */
-    .research-questions {
-      list-style: none;
-      margin: 1.5rem 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .research-questions li {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem 1.25rem;
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-    .research-questions li strong {
-      color: var(--text);
-      display: block;
-      margin-bottom: 0.2rem;
-      font-size: 0.875rem;
-    }
-
-    /* CTA BLOCK */
-    .cta-block {
-      text-align: center;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 3rem 2rem;
-      margin: 4rem 0 2rem;
-    }
-    .cta-block h2 {
-      font-size: clamp(1.5rem, 3vw, 2.25rem);
-      margin-bottom: 1rem;
-    }
-    .cta-block p {
-      max-width: 500px;
-      margin: 0 auto 2rem;
-      font-size: 1rem;
-    }
-    .cta-row {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .btn-primary {
-      background: var(--green);
-      color: #000;
-      font-weight: 800;
-      font-size: 1rem;
-      padding: 0.85rem 2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-    .btn-primary:hover { opacity: 0.85; }
-    .btn-secondary {
-      background: transparent;
-      color: var(--text);
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 0.85rem 2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      border: 1px solid var(--border);
-      transition: border-color 0.2s;
-    }
-    .btn-secondary:hover { border-color: var(--green); color: var(--green); }
-
-    /* CITATION */
+    /* ─── CITATIONS ─── */
     .cite {
-      font-size: 0.78rem;
-      color: var(--muted);
-      opacity: 0.7;
+      font-size: 0.775rem;
+      color: var(--ink-faint);
       font-style: italic;
     }
 
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.8rem;
+    /* ─── PIPELINE ─── */
+    .pipeline {
+      margin: 2rem 0;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      overflow: hidden;
     }
-    footer a { color: var(--muted); text-decoration: none; margin: 0 0.5rem; }
-    footer a:hover { color: var(--text); }
+    .pipe-step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      border-bottom: 1px solid var(--rule);
+      background: var(--white);
+      transition: background 0.15s;
+    }
+    .pipe-step:last-child { border-bottom: none; }
+    .pipe-step:hover { background: var(--surface); }
+    .pipe-n {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 1.25rem 0 0;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--ink-faint);
+      border-right: 1px solid var(--rule);
+    }
+    .pipe-body { padding: 1.25rem 1.4rem; }
+    .pipe-body h4 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+    .pipe-body p {
+      font-size: 0.85rem;
+      margin: 0;
+      color: var(--ink-soft);
+      max-width: 100%;
+    }
 
-    @media (max-width: 600px) {
-      nav { padding: 0.75rem 1rem; }
-      .hero { padding: 3rem 1rem 2rem; }
-      .container { padding: 0 1rem; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .compare-table { font-size: 0.78rem; }
-      .compare-table th, .compare-table td { padding: 0.5rem 0.6rem; }
+    /* ─── CAPABILITY TABLE ─── */
+    .cap-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 2rem 0;
+    }
+    .cap-table thead tr {
+      border-bottom: 2px solid var(--ink);
+    }
+    .cap-table th {
+      padding: 0.6rem 1rem 0.6rem 0;
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--ink);
+    }
+    .cap-table th.us { color: var(--navy); }
+    .cap-table th:first-child { color: var(--ink-soft); }
+    .cap-table td {
+      padding: 0.75rem 1rem 0.75rem 0;
+      border-bottom: 1px solid var(--rule);
+      color: var(--ink-soft);
+      vertical-align: top;
+    }
+    .cap-table td.us { color: var(--ink); font-weight: 500; }
+    .yes { color: #16a34a; font-weight: 600; }
+    .no  { color: var(--ink-faint); }
+
+    /* ─── RESEARCH QUESTIONS ─── */
+    .rq-list {
+      list-style: none;
+      margin: 1.75rem 0;
+    }
+    .rq-list li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 0.75rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .rq-list li:first-child { border-top: 1px solid var(--rule); }
+    .rq-n {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--ink-faint);
+      padding-top: 3px;
+    }
+    .rq-body strong {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+    .rq-body span {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+
+    /* ─── FINAL CTA ─── */
+    .cta-section {
+      padding: 4rem 3rem;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .cta-inner {
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--navy);
+      padding: 2.5rem 2.75rem;
+      border-radius: 0 0 6px 6px;
+    }
+    .cta-inner h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.5px;
+    }
+    .cta-inner p {
+      color: var(--ink-mid);
+      font-size: 0.9375rem;
+      margin-bottom: 2rem;
+      max-width: 560px;
+    }
+    .cta-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--navy);
+      color: #fff;
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.7rem 1.75rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: #152d54; }
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--navy);
+      font-family: var(--font);
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.7rem 1.75rem;
+      border-radius: 4px;
+      text-decoration: none;
+      border: 1px solid var(--navy);
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-outline:hover { background: var(--navy); color: #fff; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    footer .f-links { display: flex; gap: 1.5rem; }
+    footer a {
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--ink); }
+    .disclaimer {
+      font-size: 0.75rem;
+      color: var(--ink-faint);
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 3rem 2rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 640px) {
+      .topbar { padding: 0.85rem 1.25rem; }
+      .cover { padding: 2.5rem 1.25rem 2rem; }
+      .body { padding: 0 1.25rem; }
+      .cover-stats { gap: 1.75rem; flex-wrap: wrap; }
+      .cta-section { padding: 2.5rem 1.25rem; }
+      .cta-inner { padding: 1.75rem 1.25rem; }
+      footer { padding: 1.5rem 1.25rem; }
+      .disclaimer { padding: 0 1.25rem 1.5rem; }
+      .cap-table th, .cap-table td { padding: 0.6rem 0.5rem 0.6rem 0; font-size: 0.78rem; }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <a class="nav-brand" href="https://ferroquant.github.io">
-    <img src="/logo-horizontal.svg" alt="FerroQuant">
+<!-- TOP BAR -->
+<header class="topbar">
+  <a href="https://ferroquant.github.io">
+    <img class="topbar-logo" src="/logo-stacked-dark.svg" alt="FerroQuant">
   </a>
-  <div class="nav-links">
-    <a class="nav-link" href="https://ferroquant.github.io">Home</a>
-    <a class="nav-cta" href="https://ferroquant.com">Start Free →</a>
-  </div>
-</nav>
+  <nav class="topbar-right">
+    <a href="https://ferroquant.github.io">Home</a>
+    <a href="https://ferroquant.com" class="topbar-btn">Access Platform →</a>
+  </nav>
+</header>
 
-<div class="hero">
-  <img src="/logo-horizontal.svg" alt="FerroQuant" style="height:48px; margin-bottom:2rem; opacity:0.9;">
-  <div class="hero-label">The Science</div>
-  <h1>The Edge Has Always<br>Been <span>Systematic</span></h1>
-  <p class="hero-sub">
-    For 30 years, quantitative hedge funds have used systematic algorithms
-    to consistently outperform discretionary traders. The infrastructure
-    existed. The access didn't — until now.
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-meta">
+    <img class="cover-logo" src="/icon-dark.svg" alt="">
+    <div class="cover-divider"></div>
+    <div class="cover-label">
+      FerroQuant Research
+      <span>Methodology Overview · March 2026</span>
+    </div>
+  </div>
+
+  <h1>Systematic Advantage:<br>Institutional Methodology<br>for Every Trader</h1>
+
+  <p class="cover-sub">
+    For three decades, systematic quantitative strategies have been the
+    preserve of institutional trading desks. The infrastructure required
+    to run them — real-time data pipelines, regime-aware allocation, ML
+    signal filtering — has been prohibitively complex and expensive to build.
+    FerroQuant removes that barrier entirely.
   </p>
-  <a class="hero-cta" href="https://ferroquant.com">Access the Platform →</a>
+
+  <div class="cover-stats">
+    <div class="cstat">
+      <div class="cstat-val">178</div>
+      <div class="cstat-lbl">Quantitative strategies</div>
+    </div>
+    <div class="cstat">
+      <div class="cstat-val">1,056+</div>
+      <div class="cstat-lbl">Instruments monitored</div>
+    </div>
+    <div class="cstat">
+      <div class="cstat-val">5</div>
+      <div class="cstat-lbl">Asset classes</div>
+    </div>
+    <div class="cstat">
+      <div class="cstat-val">7yr</div>
+      <div class="cstat-lbl">Historical data</div>
+    </div>
+  </div>
 </div>
 
-<div class="container">
+<!-- BODY -->
+<div class="body">
 
-  <!-- SECTION 1: WHY RETAIL LOSES -->
+  <!-- 01 THE PROBLEM -->
   <section>
-    <p class="section-num">01 — The Problem</p>
-    <h2>Why Most Traders Lose — And Why It's Not Their Fault</h2>
+    <div class="sec-header">
+      <span class="sec-num">01</span>
+      <h2>The Structural Disadvantage Facing Retail Traders</h2>
+    </div>
     <p>
-      The market is not a level playing field. While retail traders respond to headlines
-      and gut instinct, institutional algorithms process thousands of signals per second
-      across dozens of correlated markets. The game is rigged — not by conspiracy, but
-      by infrastructure asymmetry.
+      The professional trading industry has known for decades that systematic,
+      rule-based approaches outperform discretionary decision-making over any
+      sufficiently long time horizon. The evidence is not theoretical — it is
+      embedded in the returns of the world's most successful trading firms,
+      from Renaissance Technologies to Winton Group to Two Sigma.
     </p>
     <p>
-      <strong>Emotions override logic.</strong> Research by Barber &amp; Odean (2000) found
-      that retail traders who trade most frequently earn the lowest returns — not because
-      they lack intelligence, but because human psychology is incompatible with consistent
-      execution at scale. Fear sells too early. Greed holds too long.
+      The reason is straightforward. <strong>Human cognition is poorly suited to
+      consistent execution under uncertainty.</strong> Loss aversion causes premature
+      exits. Recency bias distorts probability estimates. Overconfidence inflates
+      position sizes after winning streaks. These effects compound. Barber and Odean
+      (2000) documented that the most active retail traders earn the lowest returns
+      — not from lack of intelligence, but from the irreducible costs of discretionary
+      decision-making at scale.
+      <span class="cite">[Barber, B.M. &amp; Odean, T. (2000). Trading Is Hazardous to Your Wealth. Journal of Finance, 55(2), 773–806.]</span>
     </p>
     <p>
-      <strong>No single strategy works in all conditions.</strong> A momentum strategy
-      that crushes a trending market bleeds in a range-bound one. A mean-reversion
-      strategy that thrives in low volatility explodes in a breakout. Without regime
-      detection, you're always fighting the last war.
+      <strong>The second problem is scope.</strong> No human trader can meaningfully
+      monitor over a thousand instruments across five asset classes simultaneously.
+      By the time a manual analysis is complete, the entry opportunity has
+      passed or the conditions have changed. Systematic execution at the speed
+      of computation is not a marginal advantage — it is a categorical one.
     </p>
     <p>
-      <strong>You can't watch 1,056 instruments manually.</strong> By the time a human
-      identifies a signal, validates it, and executes it, the edge is gone. Algorithms
-      don't blink.
+      <strong>The third problem is market regime.</strong> Most strategies, however
+      well-designed, are regime-specific. A momentum strategy that compounds
+      effectively during a trending market will suffer significant drawdown in a
+      mean-reverting environment. Without a mechanism to detect regime transitions
+      and adapt strategy allocation accordingly, even sophisticated approaches
+      degrade over time.
     </p>
     <div class="callout">
-      <p>
-        <em>The institutions knew this.</em> That's why Two Sigma, Renaissance Technologies,
-        and Citadel spent billions building systematic infrastructure. Not to gamble —
-        to remove the human error that makes markets predictable to those who can see it.
-      </p>
+      <p>The institutions solved these problems long ago. The infrastructure
+      they built to do so has, until now, been inaccessible to individual traders.
+      FerroQuant is built on the same principles.</p>
     </div>
   </section>
 
-  <!-- SECTION 2: WHY SYSTEMATIC WINS -->
+  <!-- 02 THE SCIENCE -->
   <section>
-    <p class="section-num">02 — The Science</p>
-    <h2>What Decades of Research Actually Show</h2>
+    <div class="sec-header">
+      <span class="sec-num">02</span>
+      <h2>The Academic Foundations of Systematic Trading</h2>
+    </div>
     <p>
-      Quantitative finance isn't a secret. It's a body of peer-reviewed academic work
-      spanning 40 years — most of it publicly available. What's been missing is the
-      infrastructure to act on it in real-time, across multiple assets, at retail scale.
+      Quantitative finance is not an esoteric discipline. It is a body of
+      peer-reviewed research spanning four decades, accumulated across some of
+      the most rigorous academic institutions in the world. The following
+      principles form the foundation of FerroQuant's methodology.
     </p>
     <p>
-      <strong>Momentum works.</strong> Jegadeesh &amp; Titman (1993) documented
-      statistically significant momentum effects across equities.
-      Subsequent research confirmed the same pattern in commodities, currencies, and
-      crypto — assets that move together are likely to keep moving together, for a
-      while. <span class="cite">[Moskowitz, Ooi &amp; Pedersen, 2012 — Time Series Momentum]</span>
+      <strong>Momentum.</strong> Jegadeesh and Titman (1993) demonstrated that
+      securities which have outperformed over a 3–12 month window continue to
+      outperform in the near term — a finding subsequently replicated across
+      equities, bonds, currencies, and commodities. Moskowitz, Ooi and Pedersen
+      (2012) extended this to time-series momentum, showing that the asset's own
+      past return predicts its future return with statistical significance across
+      58 liquid instruments.
+      <span class="cite">[Jegadeesh, N. &amp; Titman, S. (1993). Returns to Buying Winners and Selling Losers. Journal of Finance, 48(1), 65–91. | Moskowitz, T., Ooi, Y.H. &amp; Pedersen, L.H. (2012). Time Series Momentum. Journal of Financial Economics, 104(2), 228–250.]</span>
     </p>
     <p>
-      <strong>Mean reversion also works — in different regimes.</strong> De Bondt &amp;
-      Thaler (1985) showed that extreme losers outperform extreme winners over 3-5 year
-      windows. At shorter timeframes, the same principle applies when volatility collapses
-      and price action tightens into a range. The key insight: these two forces operate
-      in different market states. You need both — switched by context.
+      <strong>Mean reversion.</strong> De Bondt and Thaler (1985) showed that
+      extreme price movements tend to reverse over longer horizons. At shorter
+      intraday and daily timeframes, the same principle holds in range-bound
+      markets where volatility is compressed. The critical insight is that momentum
+      and mean reversion are not competing hypotheses — they operate in different
+      market states, and the key determinant is regime.
+      <span class="cite">[De Bondt, W.F.M. &amp; Thaler, R. (1985). Does the Stock Market Overreact? Journal of Finance, 40(3), 793–805.]</span>
     </p>
     <p>
-      <strong>Diversification across uncorrelated strategies outperforms any single
-      strategy.</strong> This isn't opinion — it's the mathematical result of ensemble
-      theory. When 178 strategies with different edge profiles are run simultaneously,
-      the aggregate signal-to-noise ratio improves in proportion to the square root of
-      the number of independent strategies. <span class="cite">[Markowitz, 1952 — Portfolio Selection]</span>
+      <strong>Ensemble diversification.</strong> Markowitz (1952) established that
+      combining uncorrelated return streams reduces portfolio variance without
+      proportionally reducing expected return. When applied to strategy portfolios
+      rather than asset portfolios, the mathematics is identical: running 178
+      strategies with differentiated edge profiles materially improves
+      signal-to-noise ratio relative to any single strategy in isolation.
+      <span class="cite">[Markowitz, H. (1952). Portfolio Selection. Journal of Finance, 7(1), 77–91.]</span>
     </p>
     <p>
-      <strong>Market regimes are detectable.</strong> Hidden Markov Models — used in
-      speech recognition, genomics, and finance alike — can identify latent market
-      states (trending, ranging, volatile) from observable price and volume data.
-      When a regime shifts, strategy performance flips predictably.
-      <span class="cite">[Hamilton, 1989 — A New Approach to the Economic Analysis of Nonstationary Time Series]</span>
+      <strong>Regime detection.</strong> Hamilton (1989) demonstrated that
+      macroeconomic time series exhibit regime-switching behaviour — periods of
+      distinct statistical properties separated by transition points that can be
+      modelled using Hidden Markov Models. Applied to financial markets, this
+      framework allows systematic identification of trending, ranging, and volatile
+      regimes, enabling appropriate strategy allocation for each condition.
+      <span class="cite">[Hamilton, J.D. (1989). A New Approach to the Economic Analysis of Nonstationary Time Series. Econometrica, 57(2), 357–384.]</span>
     </p>
     <div class="callout">
-      <p>
-        <em>The conclusion of 40 years of research:</em> systematic, diversified,
-        regime-aware trading outperforms both passive holding and discretionary
-        trading over any sufficiently long horizon. Institutions act on this.
-        Now you can too.
-      </p>
+      <p>Each of these findings has been replicated across asset classes,
+      time periods, and geographies. The evidence for systematic, diversified,
+      regime-aware trading is not speculative — it is among the most robust
+      empirical findings in the financial economics literature.</p>
     </div>
   </section>
 
-  <!-- SECTION 3: HOW FERROQUANT WORKS -->
+  <!-- 03 THE SYSTEM -->
   <section>
-    <p class="section-num">03 — The System</p>
-    <h2>How FerroQuant Implements This at Scale</h2>
+    <div class="sec-header">
+      <span class="sec-num">03</span>
+      <h2>FerroQuant's Implementation Architecture</h2>
+    </div>
     <p>
-      Every component of FerroQuant maps directly to an established quantitative
-      principle. Nothing is proprietary in concept — only in implementation speed,
-      scale, and integration.
+      FerroQuant operationalises the above principles in a production system
+      running continuously across five asset classes. Each layer of the
+      architecture corresponds directly to an empirically validated concept.
     </p>
 
     <div class="pipeline">
-      <div class="pipeline-step">
-        <div class="step-num">1</div>
-        <div class="step-content">
+      <div class="pipe-step">
+        <div class="pipe-n">01</div>
+        <div class="pipe-body">
           <h4>Market Regime Detection</h4>
-          <p>Continuous Hidden Markov Model analysis across all 5 asset classes. The system identifies the current market state before evaluating any signal. Strategies inappropriate for the current regime are automatically suppressed.</p>
+          <p>Continuous Hidden Markov Model analysis identifies the prevailing market state across all five asset classes. Strategy allocation is conditioned on regime classification. Strategies incongruent with the current regime are suppressed before signal evaluation.</p>
         </div>
       </div>
-      <div class="pipeline-step">
-        <div class="step-num">2</div>
-        <div class="step-content">
-          <h4>Strategy Tournament</h4>
-          <p>178 quantitative strategies compete on live market data using successive halving. Underperforming strategies are eliminated in real-time. Only battle-tested strategies reach signal generation — and their weighting reflects recent performance.</p>
+      <div class="pipe-step">
+        <div class="pipe-n">02</div>
+        <div class="pipe-body">
+          <h4>Strategy Tournament and Selection</h4>
+          <p>178 quantitative strategies compete continuously on live market data using successive halving elimination. Strategies are evaluated on risk-adjusted performance metrics. Only those demonstrating statistically significant edge under current conditions progress to signal generation.</p>
         </div>
       </div>
-      <div class="pipeline-step">
-        <div class="step-num">3</div>
-        <div class="step-content">
-          <h4>ML Signal Filtering</h4>
-          <p>Every candidate signal passes through an ONNX ensemble model trained separately for LONG and SHORT positions. The filter removes low-confidence signals before they generate noise. The result is fewer, higher-quality signals.</p>
+      <div class="pipe-step">
+        <div class="pipe-n">03</div>
+        <div class="pipe-body">
+          <h4>Machine Learning Signal Filtering</h4>
+          <p>Candidate signals pass through an ONNX ensemble model trained separately for long and short directional bias. The filter is calibrated to minimise false positives rather than maximise recall — fewer, higher-conviction signals are preferable to a high-volume, low-quality signal stream.</p>
         </div>
       </div>
-      <div class="pipeline-step">
-        <div class="step-num">4</div>
-        <div class="step-content">
-          <h4>Multi-Asset Live Execution</h4>
-          <p>6 independent signal engines run simultaneously — one per market. Signals from crypto futures, spot, forex, stock indices, and commodities are aggregated, cross-correlated, and ranked by confidence before delivery.</p>
+      <div class="pipe-step">
+        <div class="pipe-n">04</div>
+        <div class="pipe-body">
+          <h4>Multi-Asset Execution and Correlation Adjustment</h4>
+          <p>Six independent signal engines — one per market — run in parallel. Cross-asset correlations are computed in real-time. Signal confidence is adjusted for correlated exposures, preventing inadvertent concentration risk across notionally distinct instruments.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 4: THE NUMBERS -->
+  <!-- 04 CAPABILITY -->
   <section>
-    <p class="section-num">04 — The Scale</p>
-    <h2>What's Running Right Now</h2>
+    <div class="sec-header">
+      <span class="sec-num">04</span>
+      <h2>Capability Comparison</h2>
+    </div>
     <p>
-      FerroQuant is not a research prototype. It is a production system, running
-      continuously, processing live market data across five asset classes 24 hours
-      a day.
+      The following table presents a factual comparison of FerroQuant's
+      current production capabilities against the leading alternatives
+      available to retail and institutional participants.
     </p>
 
-    <div class="stats-grid">
-      <div class="stat-card"><div class="val">178</div><div class="lbl">Quantitative strategies</div></div>
-      <div class="stat-card"><div class="val">1,056+</div><div class="lbl">Instruments monitored</div></div>
-      <div class="stat-card"><div class="val">5</div><div class="lbl">Asset classes</div></div>
-      <div class="stat-card"><div class="val">7yr</div><div class="lbl">Historical data validated</div></div>
-      <div class="stat-card"><div class="val">6</div><div class="lbl">Independent signal engines</div></div>
-      <div class="stat-card"><div class="val">24/7</div><div class="lbl">Live execution</div></div>
-    </div>
-
-    <table class="compare-table">
+    <table class="cap-table">
       <thead>
         <tr>
           <th>Capability</th>
           <th class="us">FerroQuant</th>
           <th>Numerai</th>
           <th>QuantConnect</th>
-          <th>Build Your Own</th>
+          <th>Self-built</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Multi-asset (5 classes)</td>
-          <td class="us"><span class="check">✓</span></td>
-          <td><span class="cross">✗</span> Equities only</td>
-          <td><span class="check">✓</span></td>
-          <td>Possible</td>
+          <td>Asset class coverage</td>
+          <td class="us"><span class="yes">5 classes</span></td>
+          <td><span class="no">Equities only</span></td>
+          <td>9 classes (cloud)</td>
+          <td>Dependent on build</td>
         </tr>
         <tr>
-          <td>Regime detection</td>
-          <td class="us"><span class="check">✓</span> Live HMM</td>
-          <td><span class="cross">✗</span></td>
-          <td><span class="cross">✗</span></td>
-          <td>Build it</td>
+          <td>Live HMM regime detection</td>
+          <td class="us"><span class="yes">Production</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">Not provided</span></td>
+          <td>Must be built</td>
         </tr>
         <tr>
-          <td>Strategy tournament</td>
-          <td class="us"><span class="check">✓</span> Live</td>
-          <td>Encrypted data only</td>
-          <td><span class="cross">✗</span></td>
-          <td>Build it</td>
+          <td>Strategy tournament system</td>
+          <td class="us"><span class="yes">Live, 178 strategies</span></td>
+          <td>Encrypted submissions</td>
+          <td><span class="no">Not provided</span></td>
+          <td>Must be built</td>
         </tr>
         <tr>
           <td>ML signal filtering</td>
-          <td class="us"><span class="check">✓</span> ONNX ensemble</td>
-          <td><span class="check">✓</span></td>
+          <td class="us"><span class="yes">ONNX ensemble</span></td>
+          <td><span class="yes">Yes</span></td>
           <td>Limited</td>
-          <td>Build it</td>
+          <td>Must be built</td>
         </tr>
         <tr>
-          <td>Zero setup for users</td>
-          <td class="us"><span class="check">✓</span></td>
-          <td><span class="check">✓</span></td>
-          <td>Partial</td>
-          <td><span class="cross">✗</span> 2–3 years</td>
+          <td>Real market data access</td>
+          <td class="us"><span class="yes">Full, unencrypted</span></td>
+          <td><span class="no">Obfuscated</span></td>
+          <td><span class="yes">Yes</span></td>
+          <td><span class="yes">Yes</span></td>
         </tr>
         <tr>
-          <td>Real market data (unencrypted)</td>
-          <td class="us"><span class="check">✓</span></td>
-          <td><span class="cross">✗</span> Encrypted</td>
-          <td><span class="check">✓</span></td>
-          <td><span class="check">✓</span></td>
+          <td>Infrastructure overhead for users</td>
+          <td class="us"><span class="yes">None</span></td>
+          <td><span class="yes">None</span></td>
+          <td>Moderate</td>
+          <td><span class="no">2–3 years to build</span></td>
+        </tr>
+        <tr>
+          <td>Live execution</td>
+          <td class="us"><span class="yes">24/7 production</span></td>
+          <td><span class="no">Payouts only</span></td>
+          <td><span class="yes">Yes</span></td>
+          <td><span class="yes">Yes (if built)</span></td>
         </tr>
       </tbody>
     </table>
   </section>
 
-  <!-- SECTION 5: FOR RESEARCHERS -->
+  <!-- 05 OPEN QUESTIONS -->
   <section>
-    <p class="section-num">05 — For Researchers</p>
-    <h2>Validate. Publish. Collaborate.</h2>
+    <div class="sec-header">
+      <span class="sec-num">05</span>
+      <h2>Open Research Questions</h2>
+    </div>
     <p>
-      FerroQuant's methodology is grounded in academic literature. We're actively
-      engaged in questions that don't yet have published answers — and we're opening
-      the platform to quantitative researchers who want to test hypotheses on real
-      infrastructure with real market data.
+      FerroQuant's infrastructure operates at a scale that surfaces empirical
+      questions not easily studied in academic or synthetic settings. The
+      following represent active areas of investigation within the platform.
+      We welcome collaboration with quantitative researchers who have relevant
+      expertise.
     </p>
 
-    <ul class="research-questions">
+    <ul class="rq-list">
       <li>
-        <strong>Strategy decay curves</strong>
-        How fast does discovered alpha erode after deployment? Does publication of a strategy accelerate or delay its decay?
+        <span class="rq-n">I</span>
+        <div class="rq-body">
+          <strong>Alpha Decay and Strategy Lifetime</strong>
+          <span>At what rate does a quantitative edge erode following discovery and deployment? Does publication accelerate decay? What environmental conditions (volatility regime, market microstructure) predict decay speed?</span>
+        </div>
       </li>
       <li>
-        <strong>Cross-asset regime correlation</strong>
-        Do USD strength signals in forex markets lead crypto momentum signals by a measurable lag? Quantifying cross-asset lead-lag relationships at intraday resolution.
+        <span class="rq-n">II</span>
+        <div class="rq-body">
+          <strong>Cross-Asset Lead-Lag Relationships</strong>
+          <span>To what extent do regime transitions in foreign exchange markets predict subsequent momentum reversals in cryptocurrency markets? Is there a measurable, statistically exploitable lag at intraday resolution?</span>
+        </div>
       </li>
       <li>
-        <strong>Optimal rotation frequency</strong>
-        Is strategy rotation most effective at fixed intervals (daily, weekly) or triggered by regime transitions? What's the cost of over-rotation?
+        <span class="rq-n">III</span>
+        <div class="rq-body">
+          <strong>Optimal Rotation Frequency</strong>
+          <span>Is strategy rotation most effective at fixed calendar intervals or triggered by probabilistic regime transition signals? What is the empirical cost of over-rotation versus delayed rotation in leveraged multi-strategy portfolios?</span>
+        </div>
       </li>
       <li>
-        <strong>ML confidence calibration</strong>
-        When the ensemble model outputs 80% confidence on a signal, does the realised win rate approximate 80%? If not, where is the miscalibration?
+        <span class="rq-n">IV</span>
+        <div class="rq-body">
+          <strong>ML Confidence Calibration</strong>
+          <span>When the ensemble model assigns 80% confidence to a directional signal, does the realised win rate approximate that figure? Where does systematic miscalibration emerge, and can it be corrected through Platt scaling or isotonic regression?</span>
+        </div>
       </li>
       <li>
-        <strong>Drawdown ratchet under leverage</strong>
-        What is the mathematically optimal tightening schedule for position sizing limits following a drawdown, as a function of leverage and strategy count?
+        <span class="rq-n">V</span>
+        <div class="rq-body">
+          <strong>Drawdown-Contingent Position Sizing</strong>
+          <span>What is the mathematically optimal schedule for reducing position size following a drawdown, as a function of current leverage, strategy count, and regime confidence? Kelly-derived bounds assume stationarity — how should they be adjusted in practice?</span>
+        </div>
       </li>
     </ul>
 
-    <p>
-      If you're a quantitative finance researcher, PhD student, or academic lab with
-      relevant expertise — we offer access to production infrastructure, 7 years of
-      market data, and live execution results to collaborate.
-    </p>
-    <p style="margin-top: 0.5rem;">
-      <a href="https://ferroquant.com">Apply for research access →</a>
+    <p style="margin-top: 1.5rem;">
+      Researchers interested in accessing FerroQuant's production infrastructure
+      and historical dataset for collaborative investigation are invited to
+      <a href="https://ferroquant.com">register on the platform</a> and indicate
+      their institutional affiliation and research focus.
     </p>
   </section>
 
-</div>
+</div><!-- /body -->
 
 <!-- FINAL CTA -->
-<div class="container">
-  <div class="cta-block">
-    <h2>The Edge Is Systematic.<br>The Access Is Yours.</h2>
+<div class="cta-section">
+  <div class="cta-inner">
+    <h2>Access the Platform</h2>
     <p>
-      Stop trading on instinct. Start trading on the same principles
-      that power institutional quantitative desks — without the infrastructure overhead.
+      The methodology outlined above runs continuously in production.
+      Free access is available. Professional and Trader tiers unlock
+      the full signal stream, priority execution data, and advanced analytics.
     </p>
     <div class="cta-row">
       <a class="btn-primary" href="https://ferroquant.com">Start Free →</a>
-      <a class="btn-secondary" href="https://ferroquant.com">View Pricing</a>
+      <a class="btn-outline" href="https://ferroquant.com">View Pricing</a>
     </div>
   </div>
 </div>
 
 <footer>
-  <p>
+  <div class="f-links">
     <a href="https://ferroquant.github.io">Home</a>
     <a href="https://ferroquant.com">Platform</a>
     <a href="https://github.com/FerroQuant">GitHub</a>
     <a href="/terms">Terms</a>
     <a href="/privacy">Privacy</a>
-  </p>
-  <p style="margin-top: 0.75rem; opacity: 0.5;">
-    © 2026 FerroQuant. Past performance of systematic strategies does not guarantee future results.
-    All trading involves risk.
-  </p>
+  </div>
+  <span style="font-size:0.8rem; color:var(--ink-faint);">© 2026 FerroQuant</span>
 </footer>
+
+<p class="disclaimer">
+  This document is provided for informational purposes only and does not constitute
+  financial advice or a solicitation to trade. Past performance of systematic
+  strategies does not guarantee future results. All trading involves risk of loss.
+</p>
 
 </body>
 </html>
